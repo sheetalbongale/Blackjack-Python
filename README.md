@@ -1,6 +1,6 @@
 # Blackjack Game 
 
-####Submitted by : Sheetal Bongale | Feb 23, 2020
+#### Submitted by : Sheetal Bongale | Feb 23, 2020
 
 A simple Blackjack game using Python demonstrating OOP concepts.
 
