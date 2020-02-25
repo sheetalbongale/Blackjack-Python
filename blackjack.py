@@ -123,7 +123,8 @@ class Game:
                 self.dealer_hand.add_card(self.deck.deal())
 
             print("---------------------------------")
-            print("Lets play the game of BlackJack!")
+            print(" ♠♣♥♦ WELCOME TO BLACKJACK! ♠♣♥♦")
+            print("           Lets Play!")
             print("---------------------------------")
             print("")
             print("Your hand is:")
@@ -144,9 +145,9 @@ class Game:
                     )
                     continue
 
-                choice = input("\nPlease choose [Hit(H) / Stand(S)] ").lower()
+                choice = input("\nPlease choose [Hit (h)/Stand (s)] ").lower()
                 while choice not in ["h", "s", "hit", "stand"]:
-                    choice = input("Please enter 'hit' or 'stand' (or H/S) ").lower()
+                    choice = input("Invalid input. Please enter 'Hit' or 'Stand' (or h/s) ").lower()
                 if choice in ["hit", "h"]:
                     self.player_hand.add_card(self.deck.deal())
                     self.player_hand.display()
@@ -167,14 +168,13 @@ class Game:
                         print("Tie!")
                     else:
                         print("Dealer Wins!")
-                    print("---------------------------------")
                     game_over = True
 
             again = input("Play Again? [Y/N] ")
             while again.lower() not in ["y", "n"]:
-                again = input("Please enter Y or N ")
+                again = input("Invalid Input. Please enter Y or N ")
             if again.lower() == "n":
-                print("\n-------Thanks for playing!-------")
+                print("\n-------Thanks for playing!-------\n")
                 playing = False
             else:
                 game_over = False
