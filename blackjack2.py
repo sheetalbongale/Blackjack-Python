@@ -1,7 +1,4 @@
-# Blackjack #
-# Submitted by : Sheetal Bongale
-# This Python script simulates a simple command-line Blackjack game implemented using Python Object Oriented Programming
-# Python 3.8
+
 
 import random
 

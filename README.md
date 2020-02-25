@@ -1,8 +1,8 @@
-# Blackjack Game 
+# Blackjack Game ♠️♥️♣️♦️
 
 #### Submitted by : Sheetal Bongale | Feb 23, 2020
 
-A simple Blackjack game using Python demonstrating OOP concepts.
+A simple Blackjack game using Python implementing Object Oriented Programming concepts.
 
 - - -
 
