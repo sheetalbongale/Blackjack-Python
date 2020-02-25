@@ -1,6 +1,6 @@
 # Blackjack #
 # Submitted by : Sheetal Bongale
-# This Python script simulates a simple command-line Blackjack game implemented using Python Object Oriented Programming
+# This Python script simulates a simple command-line Blackjack game implemented using Python and Object Oriented Programming concepts
 # Python 3.8
 
 import random
@@ -18,6 +18,7 @@ class Card:
 # define class for deck - holds the 52 unique cards and the logic for shuffling and dealing
 class Deck:
 
+    # list comprehension containing lists of every suit and value
     def __init__(self):
         self.cards = [Card(suit, value) for suit in ["Spades ♠", "Clubs ♣", "Hearts ♥", "Diamonds ♦"] for value in
                       ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]]
@@ -26,33 +27,43 @@ class Deck:
         if len(self.cards) > 1:
             random.shuffle(self.cards)
 
+    # return the top card and remove it from the deck so that it cannot be dealt again - pop fn
     def deal(self):
         if len(self.cards) > 1:
             return self.cards.pop(0)
 
-# define class for Hand - holds the value of cards based by the rules of the game
+# define class for Hand - holds the value of cards based by the rules of the game, define and display scores
 class Hand:
+
     def __init__(self, dealer=False):
         self.dealer = dealer
         self.cards = []
         self.value = 0
 
+    #  add the Card instance
     def add_card(self, card):
         self.cards.append(card)
 
+    # calculating the currently held cards value
     def calculate_value(self):
+        # assume start value = 0 and the player does not have an ace
         self.value = 0
         has_ace = False
+
+        # loop to add values of the card: non-ace cards and ace cards
         for card in self.cards:
+            # this will add value to hand if the cards are numerical i.e non-ace cards
             if card.value.isnumeric():
                 self.value += int(card.value)
             else:
+                # value to hand for ace-cards
                 if card.value == "A":
                     has_ace = True
                     self.value += 11
                 else:
                     self.value += 10
 
+        # make ace value = 1 instead of 11
         if has_ace and self.value > 21:
             self.value -= 10
 
@@ -60,6 +71,7 @@ class Hand:
         self.calculate_value()
         return self.value
 
+    # display each hand's cards
     def display(self):
         if self.dealer:
             print("Hidden")
@@ -73,7 +85,8 @@ class Hand:
 class Game:
     def __init__(self):
         pass
-
+    
+    # track whether or not we are still playing the game
     def play(self):
         playing = True
         
@@ -83,7 +96,8 @@ class Game:
 
             self.player_hand = Hand()
             self.dealer_hand = Hand(dealer=True)
-
+            
+            # deal two cards each to the player and the dealer
             for _ in range(2):
                 self.player_hand.add_card(self.deck.deal())
                 self.dealer_hand.add_card(self.deck.deal())
@@ -126,7 +140,7 @@ class Game:
                     print("Dealer's hand:", dealer_hand_value)
                     print("---------------------------------")
                     if player_hand_value > dealer_hand_value:
-                        print("You Win!")
+                        print("Blackjack! You Win!")
                     elif player_hand_value == dealer_hand_value:
                         print("Tie!")
                     else:
