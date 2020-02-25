@@ -1,13 +1,14 @@
-# Blackjack #
+########################################################## Blackjack ###########################################################
+# -*- coding: utf-8 -*-
 # Submitted by : Sheetal Bongale
-# This Python script simulates a simple command-line Blackjack game implemented using Python and Object Oriented Programming concepts
-# Python 3.8
+# Python script simulates a simple command-line Blackjack game implemented using Python and Object Oriented Programming concepts
+# System Requirements: Python 3.8 (Python3)
+################################################################################################################################
 
 import random
 
 # define class for cards - holds the value and suit of an individual card
 class Card:
-    
     def __init__(self, suit, value):
         self.suit = suit
         self.value = value
@@ -15,13 +16,31 @@ class Card:
     def __repr__(self):
         return " of ".join((self.value, self.suit))
 
+
 # define class for deck - holds the 52 unique cards and the logic for shuffling and dealing
 class Deck:
 
     # list comprehension containing lists of every suit and value
     def __init__(self):
-        self.cards = [Card(suit, value) for suit in ["Spades ♠", "Clubs ♣", "Hearts ♥", "Diamonds ♦"] for value in
-                      ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]]
+        self.cards = [
+            Card(suit, value)
+            for suit in ["Spades ♠", "Clubs ♣", "Hearts ♥", "Diamonds ♦"]
+            for value in [
+                "A",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "J",
+                "Q",
+                "K",
+            ]
+        ]
 
     def shuffle(self):
         if len(self.cards) > 1:
@@ -32,9 +51,9 @@ class Deck:
         if len(self.cards) > 1:
             return self.cards.pop(0)
 
+
 # define class for Hand - holds the value of cards based by the rules of the game, define and display scores
 class Hand:
-
     def __init__(self, dealer=False):
         self.dealer = dealer
         self.cards = []
@@ -81,22 +100,23 @@ class Hand:
                 print(card)
             print("Value:", self.get_value())
 
-# 
+
+# main script to define the game flow
 class Game:
     def __init__(self):
         pass
-    
+
     # track whether or not we are still playing the game
     def play(self):
         playing = True
-        
+
         while playing:
             self.deck = Deck()
             self.deck.shuffle()
 
             self.player_hand = Hand()
             self.dealer_hand = Hand(dealer=True)
-            
+
             # deal two cards each to the player and the dealer
             for _ in range(2):
                 self.player_hand.add_card(self.deck.deal())
@@ -111,7 +131,7 @@ class Game:
             print()
             print("Dealer's hand is:")
             self.dealer_hand.display()
-            
+
             # enter a loop that will run until a winner is decided
             game_over = False
 
@@ -119,13 +139,15 @@ class Game:
                 player_has_blackjack, dealer_has_blackjack = self.check_for_blackjack()
                 if player_has_blackjack or dealer_has_blackjack:
                     game_over = True
-                    self.show_blackjack_results(player_has_blackjack, dealer_has_blackjack)
+                    self.show_blackjack_results(
+                        player_has_blackjack, dealer_has_blackjack
+                    )
                     continue
 
                 choice = input("\nPlease choose [Hit(H) / Stand(S)] ").lower()
                 while choice not in ["h", "s", "hit", "stand"]:
                     choice = input("Please enter 'hit' or 'stand' (or H/S) ").lower()
-                if choice in ['hit', 'h']:
+                if choice in ["hit", "h"]:
                     self.player_hand.add_card(self.deck.deal())
                     self.player_hand.display()
                     if self.player_is_over():
@@ -147,7 +169,7 @@ class Game:
                         print("Dealer Wins!")
                     print("---------------------------------")
                     game_over = True
-            
+
             again = input("Play Again? [Y/N] ")
             while again.lower() not in ["y", "n"]:
                 again = input("Please enter Y or N ")
@@ -179,6 +201,7 @@ class Game:
 
         elif dealer_has_blackjack:
             print("Dealer has blackjack! Dealer wins!")
+
 
 # run the game - create an instance of the Game class and call the play() method
 if __name__ == "__main__":
