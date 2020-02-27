@@ -85,7 +85,7 @@ class Hand:
     def add_card(self, card):
         self.cards.append(card)
         self.value += values[card.rank]
-        if card.rank == "Ace":
+        if card.rank == "A":
             self.aces += 1  # add to self.aces
 
     def adjust_for_ace(self):
@@ -106,7 +106,7 @@ def hit_or_stand(deck, hand):
     global playing
 
     while True:
-        x = input("\nWould you like to Hit or Stand? Enter 'h' or 's' ")
+        x = input("\nWould you like to Hit or Stand? Enter [h/s] ")
 
         if x[0].lower() == "h":
             hit(deck, hand)  # hit() function defined above
@@ -116,7 +116,7 @@ def hit_or_stand(deck, hand):
             playing = False
 
         else:
-            print("Sorry, please try again.")
+            print("Sorry, Invalid Input. Please enter [h/s].")
             continue
         break
 
@@ -137,19 +137,19 @@ def show_all(player, dealer):
 
 
 def player_busts(player, dealer):
-    print("\n---Player busts!---")
+    print("\n--- Player busts! ---")
 
 
 def player_wins(player, dealer):
-    print("\n---Player has blackjack! You win!---")
+    print("\n--- Player has blackjack! You win! ---")
 
 
 def dealer_busts(player, dealer):
-    print("\n---Dealer busts!---")
+    print("\n--- Dealer busts! You win! ---")
 
 
 def dealer_wins(player, dealer):
-    print("\n---Dealer wins!---")
+    print("\n--- Dealer wins! ---")
 
 
 def push(player, dealer):
@@ -203,7 +203,7 @@ while True:
         # Show all cards
         time.sleep(1)
         print("\n----------------------------------------------------------------")
-        print("Final Results")
+        print("                     ★ Final Results ★")
         print("----------------------------------------------------------------")
 
         show_all(player_hand, dealer_hand)
